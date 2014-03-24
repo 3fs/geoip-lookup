@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>IP Locator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="http://www.embed-google-map.com/google-style.css?style-for-map" />
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>IP Locator</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <tr>
+                        <td>IP:</td>
+                        <td>{{printf "%s" .Ip}}</td>
+                    </tr>
+                    <tr>
+                        <td>Country code:</td>
+                        <td>{{printf "%s" .CountryCode}}</td>
+                    </tr>
+                    <tr>
+                        <td>Country name:</td>
+                        <td>{{printf "%s" .CountryName}}</td>
+                    </tr>
+                    <tr>
+                        <td>City:</td>
+                        <td>{{printf "%s" .City}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gmap_canvas"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <img src="images/logo_3fs.png" alt="3fs logo" id="logo" class="img-responsive" />
+            </div>
+        </div>
+    </div>
+    <div id="lats" class="hidden">{{printf "%f|%f" .Latitude .Longitude}}</div>
+</body>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
+<script type="text/javascript" src="js/functions.js"></script>
+
+</html>

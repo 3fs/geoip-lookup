@@ -1,0 +1,8 @@
+.vagrant/**
+project/pkg/**
+project/geodata/**
+project/bin/geoip-3fs
+project/src/github.com/
+
+!project/pkg/.gitkeep
+!project/geodata/.gitkeep
