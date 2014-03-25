@@ -39,8 +39,16 @@ func getData(r *http.Request) interface{} {
 		requestIp = val
 	} else {
 		// Take IP from Remote Address.
-		address := strings.Split(r.RemoteAddr, ":")
-		requestIp = address[0]
+		address := r.Header.Get("X-Real-IP")
+		if address == "" {
+			address = r.Header.Get("X-Forwarded-For")
+		}
+                if address == "" {
+			address = r.RemoteAddr
+			idx := strings.LastIndex(address, ":")
+			address = address[:idx]
+		} 
+		requestIp = address
 	}
 
 	ip := net.ParseIP(requestIp)
