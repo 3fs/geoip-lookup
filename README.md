@@ -6,6 +6,8 @@ Small server written in Go that responds with GeoIP data for given IP in chosen 
 This product includes GeoLite2 data created by MaxMind, available from
 <a href="http://www.maxmind.com">http://www.maxmind.com</a>.
 
+Development environment built using https://github.com/FreakyDazio/vagrant-golang.
+
 
 ## Project setup instructions
 
@@ -18,6 +20,7 @@ This product includes GeoLite2 data created by MaxMind, available from
 7. Setup and run project with ` . build.sh`.
 8. Go to http://192.168.33.10:8080 to see it in action.
 9. Server can be started anytime by using command `geoip-3fs`.
+10. Default port number is 8080. However, port number can be set using first argument of command. Example: `geoip-3fs 3333`.
 
 ## Usage
 

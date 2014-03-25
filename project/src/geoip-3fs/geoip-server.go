@@ -9,6 +9,8 @@ import (
 	"html/template"
 	"net"
 	"net/http"
+	"os"
+	"strconv"
 	"strings"
 )
 
@@ -43,11 +45,11 @@ func getData(r *http.Request) interface{} {
 		if address == "" {
 			address = r.Header.Get("X-Forwarded-For")
 		}
-                if address == "" {
+		if address == "" {
 			address = r.RemoteAddr
 			idx := strings.LastIndex(address, ":")
 			address = address[:idx]
-		} 
+		}
 		requestIp = address
 	}
 
@@ -92,6 +94,12 @@ func htmlHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func validatePortNumber(port string) bool {
+	i, _ := strconv.ParseInt(port, 0, 64)
+
+	return i > 0 && i < 65535
+}
+
 func main() {
 
 	if liberr != nil {
@@ -110,5 +118,13 @@ func main() {
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("bin/assets")))
 
 	http.Handle("/", r)
-	http.ListenAndServe(":8080", nil)
+
+	port := ":8080"
+
+	// Check if port was provided via argument and validate port number.
+	if len(os.Args) > 1 && validatePortNumber(os.Args[1]) == true {
+		port = fmt.Sprintf(":%s", os.Args[1])
+	}
+
+	http.ListenAndServe(port, nil)
 }
