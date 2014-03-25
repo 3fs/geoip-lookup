@@ -1,7 +1,11 @@
 GeoResolver
 ============
 
-Small server that responds with Geo data based on Maxmind's GeoIP data for given IP. Written in Go-lang.
+Small server written in Go that responds with GeoIP data for given IP in chosen format (xml/json/html)
+
+This product includes GeoLite2 data created by MaxMind, available from
+<a href="http://www.maxmind.com">http://www.maxmind.com</a>.
+
 
 ## Project setup instructions
 
