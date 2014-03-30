@@ -10,8 +10,10 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/signal"
 	"strconv"
 	"strings"
+	"syscall"
 )
 
 type ErrorMessage struct {
@@ -27,11 +29,14 @@ type ReturnData struct {
 	Longitude   float64
 }
 
+// Load templates.
+var htmlTemplates = template.Must(template.ParseFiles("bin/templates/index.html", "bin/templates/error.html"))
+
 // Load the database file
 var db, liberr = geoip2.Open("geodata/GeoLite2-City.mmdb")
 
-// Load templates.
-var htmlTemplates = template.Must(template.ParseFiles("bin/templates/index.html", "bin/templates/error.html"))
+// Create signal channel for reloading database.
+var sigs = make(chan os.Signal, 1)
 
 func getData(r *http.Request) interface{} {
 	vars := mux.Vars(r)
@@ -100,13 +105,34 @@ func validatePortNumber(port string) bool {
 	return i > 0 && i < 65535
 }
 
-func main() {
+func reloadDatabaseListener() {
+	// Wait for appropriate signal.
+	<-sigs
 
+	// Load the database file.
+	db, liberr = geoip2.Open("geodata/GeoLite2-City.mmdb")
+
+	if liberr != nil {
+		// Country database was not loaded successfully.
+		fmt.Printf("Error: %s\n", liberr.Error())
+		return
+	}
+
+	fmt.Println("Database reloaded.")
+	go reloadDatabaseListener()
+}
+
+func main() {
+	// Check if data loaded properly.
 	if liberr != nil {
 		// Country database was not loaded successfully
 		fmt.Printf("Error: %s\n", liberr.Error())
 		return
 	}
+
+	// Use SIGHUP signal for reloading database.
+	signal.Notify(sigs, syscall.SIGHUP)
+	go reloadDatabaseListener()
 
 	r := mux.NewRouter()
 	r.HandleFunc("/{ip}/json", jsonHandler)
