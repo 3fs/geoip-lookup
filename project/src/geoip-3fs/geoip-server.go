@@ -76,6 +76,7 @@ func getData(r *http.Request) interface{} {
 
 func xmlHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/xml")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	retData := getData(r)
 	msg, _ := xml.Marshal(retData)
 	w.Write(msg)
@@ -83,6 +84,7 @@ func xmlHandler(w http.ResponseWriter, r *http.Request) {
 
 func jsonHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	retData := getData(r)
 	msg, _ := json.Marshal(retData)
 	w.Write(msg)
