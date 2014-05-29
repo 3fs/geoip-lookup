@@ -1,10 +1,11 @@
 image: go1.2
 env:
   - GOROOT=/usr/local/go
+  - GOPATH=$PWD/project
 script:
   - go get github.com/oschwald/geoip2-golang
   - go get github.com/gorilla/mux
-  - go install geoip-3fs
+  - go build -o bin/geoip-lookupd geoip-lookup
 notify:
   email:
     recipients:
