@@ -2,7 +2,8 @@ geoip-lookup
 ============
 
 Small server written in Go that responds with GeoIP data for given IP in chosen format (xml/json/html)
-[![Build Status](http://188.226.235.163/github.com/3fs/geoip-lookup/status.svg?branch=master)]
+
+![Build Status](http://188.226.235.163/github.com/3fs/geoip-lookup/status.svg?branch=master)
 
 This product includes GeoLite2 data created by MaxMind, available from
 <a href="http://www.maxmind.com">http://www.maxmind.com</a>.
