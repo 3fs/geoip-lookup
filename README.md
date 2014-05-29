@@ -1,4 +1,4 @@
-GeoResolver
+geoip-lookup
 ============
 
 Small server written in Go that responds with GeoIP data for given IP in chosen format (xml/json/html)
@@ -11,16 +11,16 @@ Development environment built using https://github.com/FreakyDazio/vagrant-golan
 
 ## Project setup instructions
 
-1. Clone this repository `git clone git@github.com:3fs/geo-resolver.git`.
-2. Move to geo-resolver directory `cd geo-resolver`.
+1. Clone this repository `git clone git@github.com:3fs/geoip-lookup.git`.
+2. Move to geoip-lookup directory `cd geoip-lookup`.
 3. Run `vagrant up` to start development environment.
 4. Run `vagrant provision` to add all dependencies.
 5. Connect to host via `vagrant ssh`.
 6. Move to /vagrant directory via `cd /vagrant`.
 7. Setup and run project with ` . build.sh`.
 8. Go to http://192.168.33.10:8080 to see it in action.
-9. Server can be started anytime by using command `geoip-3fs`.
-10. Default port number is 8080. However, port number can be set using first argument of command. Example: `geoip-3fs 3333`.
+9. Server can be started anytime by using command `geoip-lookupd`.
+10. Default port number is 8080. However, port number can be set using first argument of command. Example: `geoip-lookupd 3333`.
 
 ## Usage
 

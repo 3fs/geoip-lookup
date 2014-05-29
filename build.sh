@@ -10,7 +10,7 @@ pathmunge () {
   fi
 }
 
-echo -e "\e[33mBuilding GeoResolver\e[0m"
+echo -e "\e[33mBuilding geoip-lookup\e[0m"
 
 export GOPATH=/vagrant/project
 echo -e "\e[33m[1] GOPATH set to /vagrant/project.\e[0m"
@@ -32,9 +32,8 @@ fi
 /usr/local/go/bin/go get github.com/gorilla/mux
 echo -e "\e[33m[4] GO: gorilla/mux package installed.\e[0m"
 
-(cd $GOPATH \
-    && go install geoip-3fs \
+(go build -o bin/geoip-lookupd geoip-lookup \
     && echo  -e "\e[33m[5] Project built." \
     && echo -e '[6] Running server on port 8080. Quit: Ctrl+C.\e[0m' \
-    && $GOPATH/bin/geoip-3fs > /dev/tty)
+    && $GOPATH/bin/geoip-lookupd > /dev/tty)
 
