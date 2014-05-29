@@ -8,7 +8,7 @@ deploy:
   ssh:
     target: geoip@188.226.235.163:/home/geoip/releases/
     artifacts:
-      - geoip-lookup-${DRONE_COMMIT:0:6}.tar.gz
+      - geoip-lookup-${DRONE_COMMIT:0:7}.tar.gz
 notify:
   email:
     recipients:
