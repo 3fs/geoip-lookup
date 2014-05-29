@@ -30,7 +30,7 @@ type ReturnData struct {
 }
 
 // Load templates.
-var htmlTemplates = template.Must(template.ParseFiles("bin/templates/index.html", "bin/templates/error.html"))
+var htmlTemplates = template.Must(template.ParseFiles("templates/index.html", "templates/error.html"))
 
 // Load the database file
 var db, liberr = geoip2.Open("geodata/GeoLite2-City.mmdb")
@@ -143,7 +143,7 @@ func main() {
 	r.HandleFunc("/xml", xmlHandler)
 	r.HandleFunc("/{ip}", htmlHandler)
 	r.HandleFunc("/", htmlHandler)
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("bin/assets")))
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("assets")))
 
 	http.Handle("/", r)
 
