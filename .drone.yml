@@ -3,9 +3,12 @@ env:
   - GOROOT=/usr/local/go
   - GOPATH=$PWD/project
 script:
-  - go get github.com/oschwald/geoip2-golang
-  - go get github.com/gorilla/mux
-  - go build -o bin/geoip-lookupd geoip-lookup
+  - make build
+deploy:
+  ssh:
+    target: geoip@188.226.235.163:/home/geoip/releases/
+    artifacts:
+      - geoip-lookup-${DRONE_COMMIT:0:6}.tar.gz
 notify:
   email:
     recipients:
